@@ -1,0 +1,94 @@
+<!-- TEMPERATURE CONVERTER APPLICATION -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+     <link rel="stylesheet" href="tempConverter.css">
+     <title>Temperature Converter App</title>
+    </head>
+
+        <body>
+    
+        
+            <div class="temperature-converter"> 
+                <div class="container">
+                        <div id="time">12:34</div>
+                </div>
+                <span class="material-symbols-outlined" id="signal">
+                    signal_cellular_alt
+                    </span>
+                <span class="material-symbols-outlined">
+                    battery_4_bar
+                    </span>
+                    <span class="material-symbols-outlined" id="wifi">
+                        wifi
+                        </span>
+                <h1 class="title">Temperature Converter</h1> <br>
+            
+                <div class="degree-type">
+                    <div class="degree-field">
+                        <label for="degree">Enter Degrees</label>
+                        <input type="number" name="degree" id="degree" />
+                    </div>
+                    <div class="temp-field">
+                        <label for="temp-type">Type</label>
+                        <select name="temperatures" id="temp-type" autocomplete="on">
+                            <option value="" id="select">---select---</option>
+                            <option id="fahrenheit" value="fahrenheit">Fahrenheit to Celsius</option>
+                            <option id="celsius1" value="celsius1">Celsius to Fahrenheit</option>
+                            <option id="kelvin" value="kelvin">kelvin to celsius</option>
+                            <option id="kelfahr" value="kelfahr"> kelvin to fahrenheit</option>
+                            
+                        
+                        </select>
+                    </div>
+                </div>
+                <div class="result">
+                    <span class="result-heading">Result </span>
+                    <h2 class="celsius-value" id="celsius"></h2>
+                </div>
+            
+                <button id="convert-btn">Convert</button>
+            </div>
+    <!-- JavaScript code goes here -->
+    <script>
+        const celsiusElem = document.querySelector("#celsius");
+        const degree = document.querySelector("#degree");
+        const convertBtn = document.querySelector("#convert-btn");
+        const tempType = document.querySelector("#temp-type");
+
+        window.addEventListener("load", () => {
+            degree.value = "";
+            celsiusElem.innerHTML = "";
+        });
+
+        convertBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            convertTemperature();
+        });
+
+        function convertTemperature() {
+            let inputValue = degree.value;
+
+            if (tempType.value === "fahrenheit") {
+                const FahrenheitToCelsius = (inputValue - 32) * (5 / 9);
+                celsiusElem.innerHTML = `${FahrenheitToCelsius.toFixed(3)} &deg;c`;
+            } else if (tempType.value === "celsius1") {
+                const CelsiusToFahrenheit = (inputValue * 9 / 5) + 32;
+                celsiusElem.innerHTML =` ${CelsiusToFahrenheit.toFixed(3)} F`;
+            }else if(tempType.value==="kelvin"){
+                const KelviToCelsius = (inputValue-273.15);
+                celsiusElem.innerHTML =` ${KelviToCelsius.toFixed(3)} &deg;c`;
+            }else if(tempType.value==="kelfahr"){
+                const KelvinToFahrenheit = ((inputValue-273.15)*1.8)+32;
+                celsiusElem.innerHTML =` ${KelvinToFahrenheit.toFixed(3)} F`;
+            }
+        }
+    </script>
+</body>
+
+</html>
